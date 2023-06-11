@@ -82,7 +82,7 @@ def del_phone():
         sno = request.args['sno']
         Product.query.filter_by(sno=sno).delete()
         db.session.commit()
-        return redirect('/delete')
+        return redirect('/admin')
     else:
         return 'Error With Server!'
 
