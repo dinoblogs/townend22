@@ -76,14 +76,16 @@ def handle_post():
   name1 = name1.replace(":", "")
   name1 = name1.replace(".", "")
   f.save(f'static/{name1}.png')
-  cloudinary.uploader.upload(f"static/{name1}.png", 
-                         public_id = name1)  
-  #file
+   #file
   image_url = f'https://res.cloudinary.com/dofvicxek/image/upload/c_thumb,h_250,w_216/{name1}.png'
 
   product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
   db.session.add(product)
   db.session.commit()
+  cloudinary.uploader.upload(f"static/{name1}.png", 
+                         public_id = name1)  
+
+
   return redirect('/add')
 
 @app.route('/del', methods=['GET'])
