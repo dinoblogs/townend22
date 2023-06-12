@@ -63,28 +63,28 @@ def create():
 # Post Request
 @app.route('/create', methods=['POST'])
 def handle_post():
-     title = request.form['name']
-    sp = request.form['sp']
-    rank = request.form['rank']
-    mrp = request.form['mrp']
-    desc = request.form['desc']
-    #Image
-    f = request.files['img']
-    name1 = str(datetime.now())
-    name1 = name1.replace("-", "")
-    name1 = name1.replace(" ", "")
-    name1 = name1.replace(":", "")
-    name1 = name1.replace(".", "")
-    f.save(f'static/{name1}.png')
-    cloudinary.uploader.upload(f"static/{name1}.png", 
-                               public_id = name1)  
-    #file
-    image_url = f'https://res.cloudinary.com/dofvicxek/image/upload/c_thumb,h_250,w_216/{name1}.png'
+  title = request.form['name']
+  sp = request.form['sp']
+  rank = request.form['rank']
+  mrp = request.form['mrp']
+  desc = request.form['desc']
+  #Image
+  f = request.files['img']
+  name1 = str(datetime.now())
+  name1 = name1.replace("-", "")
+  name1 = name1.replace(" ", "")
+  name1 = name1.replace(":", "")
+  name1 = name1.replace(".", "")
+  f.save(f'static/{name1}.png')
+  cloudinary.uploader.upload(f"static/{name1}.png", 
+                         public_id = name1)  
+  #file
+  image_url = f'https://res.cloudinary.com/dofvicxek/image/upload/c_thumb,h_250,w_216/{name1}.png'
 
-    product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
-    db.session.add(product)
-    db.session.commit()
-    return redirect('/add')
+  product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
+  db.session.add(product)
+  db.session.commit()
+  return redirect('/add')
 
 @app.route('/del', methods=['GET'])
 def del_phone():
