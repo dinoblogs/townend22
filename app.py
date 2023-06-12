@@ -143,7 +143,7 @@ def admin():
 
             
     else:
-        return render_template('admin-login.html' flag = flag)
+        return render_template('admin-login.html', flag = flag)
 
 @app.route("/dashboard")
 def dashboard():
