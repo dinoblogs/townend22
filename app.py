@@ -60,6 +60,9 @@ def all_product():
 def create():
     return render_template('add_item.html')
 
+  
+def pst(a):
+  m = cloudinary.uploader.upload(f"https://townend.onrender.com/static/{a}.png", public_id = name1) 
 # Post Request
 @app.route('/create', methods=['POST'])
 def handle_post():
@@ -82,7 +85,7 @@ def handle_post():
   product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
   db.session.add(product)
   db.session.commit()
-  m = cloudinary.uploader.upload(f"https://townend.onrender.com/static/{name1}.png", public_id = name1)  
+  pst(name1)
   print(m)
 
   return redirect('/add')
