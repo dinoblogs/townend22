@@ -77,7 +77,6 @@ def handle_post():
   product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
   db.session.add(product)
   db.session.commit()
-  pst(name1)
   
 
   return redirect('/add')
