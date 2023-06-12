@@ -3,16 +3,9 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from fileinput import filename
 import requests
-import cloudinary
-import cloudinary.uploader
 from datetime import datetime
 
 
-cloudinary.config( 
-  cloud_name = "dofvicxek", 
-  api_key = "465383777877424", 
-  api_secret = "a6ErazY7iy9WCT-cneQMZA7sZZQ" 
-)
 
 app = Flask(__name__)
 app.secret_key = "krishna4704"
@@ -61,8 +54,7 @@ def create():
     return render_template('add_item.html')
 
   
-def pst(a):
-  m = cloudinary.uploader.upload(f"https://townend.onrender.com/static/{a}.png", public_id = a) 
+
 # Post Request
 @app.route('/create', methods=['POST'])
 def handle_post():
@@ -80,7 +72,7 @@ def handle_post():
   name1 = name1.replace(".", "")
   f.save(f'static/{name1}.png')
    #file
-  image_url = f'https://res.cloudinary.com/dofvicxek/image/upload/c_thumb,h_250,w_216/{name1}.png'
+  image_url = f'static/{name1}.png'
 
   product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
   db.session.add(product)
