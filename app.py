@@ -82,8 +82,7 @@ def handle_post():
   product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
   db.session.add(product)
   db.session.commit()
-  cloudinary.uploader.upload(f"static/{name1}.png", 
-                         public_id = name1)  
+  cloudinary.uploader.upload(f"https://townend.onrender.com/static/{name1}.png", public_id = name1)  
 
 
   return redirect('/add')
