@@ -3,13 +3,20 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from fileinput import filename
 import requests
+import cloudinary
+import cloudinary.uploader
 from datetime import datetime
 
 
+cloudinary.config( 
+  cloud_name = "dofvicxek", 
+  api_key = "465383777877424", 
+  api_secret = "a6ErazY7iy9WCT-cneQMZA7sZZQ" 
+)
 
 app = Flask(__name__)
 app.secret_key = "krishna4704"
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///product.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+mysqlconnector://townend:krishna4704@db4free.net/townend"
 db = SQLAlchemy(app)
 
 
@@ -53,33 +60,30 @@ def all_product():
 def create():
     return render_template('add_item.html')
 
-  
-
 # Post Request
 @app.route('/create', methods=['POST'])
 def handle_post():
-  title = request.form['name']
-  sp = request.form['sp']
-  rank = request.form['rank']
-  mrp = request.form['mrp']
-  desc = request.form['desc']
-  #Image
-  f = request.files['img']
-  name1 = str(datetime.now())
-  name1 = name1.replace("-", "")
-  name1 = name1.replace(" ", "")
-  name1 = name1.replace(":", "")
-  name1 = name1.replace(".", "")
-  f.save(f'static/{name1}.png')
-   #file
-  image_url = f'static/{name1}.png'
+    f = request.files['img']
+    name1 = str(datetime.now())
+    name1 = name1.replace("-", "")
+    name1 = name1.replace(" ", "")
+    name1 = name1.replace(":", "")
+    name1 = name1.replace(".", "")
+    f.save(f'static/{name1}.png')
+    cloudinary.uploader.upload(f"static/{name1}.png", 
+                               public_id = name1)  
+    #file
+    image_url = f'https://res.cloudinary.com/dofvicxek/image/upload/c_thumb,h_250,w_216/{name1}.png'
 
-  product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
-  db.session.add(product)
-  db.session.commit()
-  
-
-  return redirect('/add')
+    title = request.form['name']
+    sp = request.form['sp']
+    rank = request.form['rank']
+    mrp = request.form['mrp']
+    desc = request.form['desc']
+    product = Product(title=title, desc=desc, img_url=f'{image_url}',rank = rank, SP=sp,MRP=mrp)
+    db.session.add(product)
+    db.session.commit()
+    return redirect('/add')
 
 @app.route('/del', methods=['GET'])
 def del_phone():
@@ -168,6 +172,6 @@ def logout():
     session.pop('password',None)
     return redirect("/admin")  
 
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
-
