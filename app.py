@@ -62,7 +62,7 @@ def create():
 
   
 def pst(a):
-  m = cloudinary.uploader.upload(f"https://townend.onrender.com/static/{a}.png", public_id = name1) 
+  m = cloudinary.uploader.upload(f"https://townend.onrender.com/static/{a}.png", public_id = a) 
 # Post Request
 @app.route('/create', methods=['POST'])
 def handle_post():
@@ -86,7 +86,7 @@ def handle_post():
   db.session.add(product)
   db.session.commit()
   pst(name1)
-  print(m)
+  
 
   return redirect('/add')
 
