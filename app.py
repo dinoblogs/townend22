@@ -83,7 +83,7 @@ def handle_post():
   db.session.add(product)
   db.session.commit()
   m = cloudinary.uploader.upload(f"https://townend.onrender.com/static/{name1}.png", public_id = name1)  
-  flask(m)
+  print(m)
 
   return redirect('/add')
 
