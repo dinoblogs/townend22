@@ -131,7 +131,7 @@ def change(name):
 
     return redirect('/add')
 
-@app.route("/admin", method=['GET']])
+@app.route("/admin", method=['GET'])
 def admin():
     flag=request.args.get('flag') 
     if 'username' in session:
