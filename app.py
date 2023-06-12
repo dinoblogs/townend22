@@ -137,7 +137,7 @@ def admin():
     if 'username' in session:
         if session['username'] == 'admin':
             if session['password'] == 'kanha0003':
-                return render_template('/dashboard')
+                return redirect('/dashboard')
             else:
                 pass
 
