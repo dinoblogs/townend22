@@ -131,8 +131,22 @@ def change(name):
 
     return redirect('/add')
 
-@app.route("/admin")
+@app.route("/admin", method=['GET']])
 def admin():
+    flag=request.args.get('flag') 
+    if 'username' in session:
+        if session['username'] == 'admin':
+            if session['password'] == 'kanha0003':
+                return render_template('/dashboard')
+            else:
+                pass
+
+            
+    else:
+        return render_template('admin-login.html' flag = flag)
+
+@app.route("/dashboard")
+def dashboard():
     if 'username' in session:
         if session['username'] == 'admin':
             if session['password'] == 'kanha0003':
@@ -141,21 +155,16 @@ def admin():
                     return render_template("dashboard.html" , dbms = dbms,error='No Item!!!')
                 else:
                     return render_template("dashboard.html" , dbms = dbms)
-            else:
-                return render_template('admin-login.html')
-        else:
-            return render_template('admin-login.html')
-
-            
     else:
         return render_template('admin-login.html')
-
 @app.route("/auth" , methods=['POST'])
 def auth():
     session['username'] = request.form["username"]
     session['password'] = request.form["password"]
-
-    return redirect('/admin')
+    if session['username'] != "admin" or session['password'] != 'kanha0003':
+        return redirect('/admin?flag=false')
+    else:
+        return redirect('/dashboard')
 
 @app.route("/logout")
 def logout():
