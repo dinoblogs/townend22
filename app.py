@@ -52,7 +52,7 @@ def home():
 
 
 
-@app.route('/contact')
+@app.route('/contact/')
 def all_product():
     return render_template('contact.html')
 
@@ -140,7 +140,7 @@ def change(name):
 
     return redirect('/add')
 
-@app.route("/admin")
+@app.route("/admin/")
 def admin():
     if 'username' in session:
         if session['username'] == 'admin':
