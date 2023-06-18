@@ -41,8 +41,6 @@ def home():
     # db.session.commit()
 
     dbms = Product.query.all()
-    print(dbms)
-    #db.session.commit()
     n = []
     if dbms == n or dbms == '':
         return render_template('index.html',error = 'Sorry No Items Available...😢', dbms=dbms , heading = 'Dino Phons' , title="Dino Phones", email="none@gmail.com", phone="8279692610", add="none", desc="This is my site")
@@ -53,7 +51,7 @@ def home():
 
 
 @app.route('/contact/')
-def all_product():
+def contact():
     return render_template('contact.html')
 
 @app.route('/add')
@@ -105,7 +103,6 @@ def items(name):
         sno = str(i.sno)
         name = str(name)
         if sno == name:
-            print("found")
             return render_template('item.html',color=None, name = i.title ,url = i.img_url, desc = i.desc, MRP = i.MRP, SP=i.SP, rank = i.rank)
             break
 
@@ -172,6 +169,30 @@ def logout():
     session.pop('password',None)
     return redirect("/admin")  
 
+@app.route("/search", methods=['GET'])
+def search():
+    user = request.args.get('q')
+    if(user == 'none'):
+        dbms = Product.query.all()
+        n = []
+        if dbms == n or dbms == '':
+            return render_template('search.html',query = 'Sorry No Items Available...😢', dbms=dbms , heading = 'Dino Phons' , title="Dino Phones", email="none@gmail.com", phone="8279692610", add="none", desc="This is my site")
+        
+
+        return render_template('search.html',query="Latest Items", dbms=dbms , heading = 'Dino Phons' , title="Dino Phones", email="none@gmail.com", phone="8279692610", add="none", desc="This is my site")
+    else:   
+
+        dbms = Product.query.filter_by(title=user).all()
+        dbms2 = Product.query.filter_by(sno=user).all()
+
+        dbms = dbms+dbms2
+        print(type(dbms))
+        query = f'Search Result for "{user}"'
+        if dbms == [] or dbms == '':
+            return render_template('search.html',query=query,error = f'Sorry No phone with term " {user} " 😢', dbms=dbms , heading = 'Dino Phons' , title="Dino Phones", email="none@gmail.com", phone="8279692610", add="none", desc="This is my site")
+        
+
+        return render_template('search.html',query=query , dbms=dbms , heading = 'Dino Phons' , title="Dino Phones", email="none@gmail.com", phone="8279692610", add="none", desc="This is my site")
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
