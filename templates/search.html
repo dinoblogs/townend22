@@ -1,1 +1,126 @@
 
+
+
+            <div class="container">
+
+
+                <!-- End .container -->
+
+                <!-- End .container -->
+
+                <!-- End .bg-light pt-5 pb-6 -->
+
+                <div class="mb-5"></div><!-- End .mb-5 -->
+
+                <div class="container for-you">
+                    <div class="heading heading-flex mb-3">
+                        <div class="heading-left">
+                            <h2 class="title">{{query}}</h2><!-- End .title -->
+                        </div><!-- End .heading-left -->
+
+                        <!-- End .heading-right -->
+                    </div><!-- End .heading -->
+
+                    <div class="products">
+                        <div class="row justify-content-center">
+                            <!-- Starting of products -->
+                            <h4 class="link link-danger">{{error}}</h4>
+                            {% for item in dbms %}
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <div class="product product-2">
+                                    <figure class="product-media">
+                                        <a href="item/{{item.sno}}">
+                                            <img src="{{item.img_url}}"
+                                                alt="Product image" class="product-image">
+                                        </a>
+
+                                        <div class="product-action-vertical">
+                                            <a href="#" class="btn-product-icon btn-wishlist"
+                                                title="Add to wishlist"></a>
+                                        </div><!-- End .product-action -->
+
+
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <a href="#">Model Name</a>
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title"><a href="item/{{item.sno}}">{{item.title}}</a></h3>
+                                        <!-- End .product-title -->
+                                        <div class="product-price">
+                                            <span class="new-price">₹{{item.MRP}}</span>
+                                            <span class="old-price"><del>₹{{item.SP}}</del></span>
+                                        </div><!-- End .product-price -->
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                                                <div class="ratings-val" style="width: 50%;"></div>
+                                                <!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                            <span class="ratings-text">(Best Quality)</span>
+                                        </div><!-- End .rating-container -->
+
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                            {% endfor %}
+
+                      
+
+                            <!-- Ending of products  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .products -->
+                </div><!-- End .container -->
+
+                <div class="mb-4"></div><!-- End .mb-4 -->
+
+                <div class="container">
+                    <hr class="mb-0">
+                </div><!-- End .container -->
+
+                
+        </main><!-- End .main -->
+</div>
+
+    <!-- Plugins JS File -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="static/assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="static/assets/js/jquery.waypoints.min.js"></script>
+    <script src="static/assets/js/superfish.min.js"></script>
+    <script src="static/assets/js/owl.carousel.min.js"></script>
+    <script src="static/assets/js/bootstrap-input-spinner.js"></script>
+    <script src="static/assets/js/jquery.plugin.min.js"></script>
+    <script src="static/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="static/assets/js/jquery.countdown.min.js"></script>
+    <!-- Main JS File -->
+    <script src="static/assets/js/main.js"></script>
+    <script src="static/assets/js/demos/demo-4.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+</body><!-- molla/index-4.html  22 Nov 2019 09:54:18 GMT -->
+
+</html>
